@@ -5,6 +5,7 @@
  */
 package org.neu.pso.config;
 
+import org.neu.pso.swarmfunctions.SwarmFunctions;
 import java.util.Vector;
 
 /**
