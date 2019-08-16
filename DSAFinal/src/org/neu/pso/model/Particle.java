@@ -6,6 +6,7 @@
 package org.neu.pso.model;
 
 import org.neu.pso.agent.PSOAgent;
+import org.neu.pso.swarmfunctions.SwarmFunctions;
 
 /**
  *
@@ -47,6 +48,7 @@ public class Particle implements Runnable{
     }
 
     public double getFitnessValue() {
+        fitnessValue = SwarmFunctions.calculateFitnessValue(location, population);
         return fitnessValue;
     }
 
@@ -71,6 +73,7 @@ public class Particle implements Runnable{
     }
 
     public double getDistance() {
+        distance = SwarmFunctions.calculateDistance(location);
         return distance;
     }
 
@@ -79,6 +82,7 @@ public class Particle implements Runnable{
     }
 
     public double getPopulation() {
+        population = SwarmFunctions.calculatePopulation(location);
         return population;
     }
 
