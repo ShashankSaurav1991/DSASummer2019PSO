@@ -18,7 +18,7 @@ public class Driver {
     public static void main(String args[]) throws InterruptedException {
         JFrame newFrame = new JFrame();
         newFrame.setVisible(true);
-        newFrame.setSize(650, 650);
+        newFrame.setSize(500, 500);
         
         Thread[] threadList = new Thread[SWARM_SIZE];
         for (int i = 0; i < SWARM_SIZE; i++) {
