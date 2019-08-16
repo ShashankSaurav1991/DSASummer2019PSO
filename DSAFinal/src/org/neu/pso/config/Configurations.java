@@ -15,15 +15,15 @@ import org.neu.pso.model.Particle;
  */
 public interface Configurations {
     int SWARM_SIZE = 50;
-	int MAX_ITERATION = 200;
-	int PROBLEM_DIMENSION = 2;
-	double C1 = 2.0;
-	double C2 = 2.0;
-	double W_UPPERBOUND = 1.0;
-	double W_LOWERBOUND = 0.0;
-        double RANGEBOUND = 150.0;
-        public double[] fitnessValueList = new double[SWARM_SIZE];
-        SwarmFunctions sFunc = new SwarmFunctions();
-        public static Vector<Particle> swarm = sFunc.initializeSwarm();
+    int MAX_ITERATION = 200;
+    int PROBLEM_DIMENSION = 2;
+    double C1 = 2.0;
+    double C2 = 2.0;
+    double W_UPPERBOUND = 1.0;
+    double W_LOWERBOUND = 0.0;
+    double RANGEBOUND = 150.0;
+    public double[] fitnessValueList = new double[SWARM_SIZE];
+    SwarmFunctions sFunc = new SwarmFunctions();
+    public static Vector<Particle> swarm = sFunc.initializeSwarm();
 
 }
