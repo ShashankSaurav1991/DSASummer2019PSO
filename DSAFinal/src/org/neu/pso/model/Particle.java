@@ -5,6 +5,8 @@
  */
 package org.neu.pso.model;
 
+import org.neu.pso.agent.PSOAgent;
+
 /**
  *
  * @author anshit
@@ -20,7 +22,8 @@ public class Particle implements Runnable{
 
     @Override
     public void run() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PSOAgent agents = new PSOAgent();
+        agents.execute(Id);
     }
     
     // Constructor
