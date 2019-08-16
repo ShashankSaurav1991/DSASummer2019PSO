@@ -7,6 +7,7 @@ package org.neu.pso.config;
 
 import org.neu.pso.swarmfunctions.SwarmFunctions;
 import java.util.Vector;
+import org.neu.pso.model.Particle;
 
 /**
  *
@@ -23,5 +24,6 @@ public interface Configurations {
         double RANGEBOUND = 150.0;
         public double[] fitnessValueList = new double[SWARM_SIZE];
         SwarmFunctions sFunc = new SwarmFunctions();
+        public static Vector<Particle> swarm = sFunc.initializeSwarm();
 
 }

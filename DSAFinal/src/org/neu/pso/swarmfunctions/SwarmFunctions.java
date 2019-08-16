@@ -17,6 +17,7 @@ import org.neu.pso.model.Velocity;
 /**
  *
  * @author anshit
+ * @author shashanksaurav
  */
 public class SwarmFunctions {
     private Vector<Particle> swarm = new Vector<Particle>();
@@ -87,6 +88,7 @@ public class SwarmFunctions {
     
         public Vector<Particle> initializeSwarm() {
         
+        
         Random generator = new Random();
         for (int i = 0; i < SWARM_SIZE; i++) {
             Particle p = new Particle();
@@ -119,5 +121,5 @@ public class SwarmFunctions {
 
         }
         return swarm;
-}
+    }
 }
