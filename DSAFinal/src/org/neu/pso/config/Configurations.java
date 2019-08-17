@@ -14,9 +14,10 @@ import org.neu.pso.model.Particle;
  * @author anshit
  */
 public interface Configurations {
-    int SWARM_SIZE = 80;//50
+
+    int SWARM_SIZE = 80;// Number of threads or agents
     int MAX_ITERATION = 200;
-    int PROBLEM_DIMENSION = 2;//2
+    int PROBLEM_DIMENSION = 2;// We can change this to implement values with more dimensions
     double C1 = 2.0;
     double C2 = 2.0;
     double W_UPPERBOUND = 1.0;

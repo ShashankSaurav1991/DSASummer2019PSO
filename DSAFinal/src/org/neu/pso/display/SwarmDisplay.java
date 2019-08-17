@@ -20,21 +20,21 @@ import static org.neu.pso.swarmfunctions.SwarmFunctions.Y_NEIGHBOURHOOD_D;
  *
  * @author shashanksaurav
  */
-public class SwarmDisplay extends JPanel implements Configurations{
-    
-    public void paint (Graphics g){
+public class SwarmDisplay extends JPanel implements Configurations {
+
+    public void paint(Graphics g) {
         Graphics2D plot_2dG = (Graphics2D) g;
         plot_2dG.setBackground(Color.yellow);
-        plot_2dG.fillOval((int)X_NEIGHBOURHOOD_C, (int)Y_NEIGHBOURHOOD_C, 30, 30);
-        plot_2dG.fillOval((int)X_NEIGHBOURHOOD_D, (int)Y_NEIGHBOURHOOD_D, 30, 30);
+        plot_2dG.fillOval((int) X_NEIGHBOURHOOD_C, (int) Y_NEIGHBOURHOOD_C, 30, 30);
+        plot_2dG.fillOval((int) X_NEIGHBOURHOOD_D, (int) Y_NEIGHBOURHOOD_D, 30, 30);
         plot_2dG.setColor(Color.RED);
         plot_2dG.fillOval(120, 290, 50, 50);
         plot_2dG.setColor(Color.ORANGE);
-        
-        for(int i = 0; i < SWARM_SIZE; i++){
+
+        for (int i = 0; i < SWARM_SIZE; i++) {
             plot_2dG.fillOval((int) swarm.get(i).getLocation().getLoc()[0], (int) swarm.get(i).getLocation().getLoc()[1], 10, 10);
             repaint((int) swarm.get(i).getLocation().getLoc()[0], (int) swarm.get(i).getLocation().getLoc()[1], 10, 10);
         }
-  
+
     }
 }

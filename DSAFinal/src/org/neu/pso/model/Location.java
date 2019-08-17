@@ -10,7 +10,6 @@ package org.neu.pso.model;
  * @author anshit
  */
 public class Location {
-	// we can actually store the Location in an array to accommodate multi-dimensional problem space
 	private double[] loc;
 
 	public Location(double[] loc) {

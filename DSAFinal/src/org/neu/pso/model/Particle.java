@@ -27,7 +27,6 @@ public class Particle implements Runnable{
         agents.execute(Id);
     }
     
-    // Constructor
     public Particle(double fitnessValue, Velocity velocity, Location location) {
         super();
         this.fitnessValue = fitnessValue;
@@ -36,7 +35,6 @@ public class Particle implements Runnable{
     }
 
     public Particle() {
-
     }
 
     public int getId() {
