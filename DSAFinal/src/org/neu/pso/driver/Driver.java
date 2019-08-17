@@ -4,9 +4,10 @@
  * and open the template in the editor.
  */
 package org.neu.pso.driver;
+import java.awt.Color;
 import static org.neu.pso.config.Configurations.SWARM_SIZE;
 import static org.neu.pso.config.Configurations.swarm;
-import org.neu.pso.display.Display;
+import org.neu.pso.display.SwarmDisplay;
 import static java.lang.Thread.sleep;
 import javax.swing.JFrame;
 
@@ -19,6 +20,8 @@ public class Driver {
         JFrame newFrame = new JFrame();
         newFrame.setVisible(true);
         newFrame.setSize(500, 500);
+        newFrame.setTitle("Particle Swarm Optimization");
+        
         
         Thread[] threadList = new Thread[SWARM_SIZE];
         for (int i = 0; i < SWARM_SIZE; i++) {
@@ -27,7 +30,7 @@ public class Driver {
         for (int i = 0; i < SWARM_SIZE; i++) {
             threadList[i].start();
             sleep(100);
-            newFrame.add(new Display());
+            newFrame.add(new SwarmDisplay());
         }
     }
 }
