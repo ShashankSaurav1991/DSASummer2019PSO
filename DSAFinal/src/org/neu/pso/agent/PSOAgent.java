@@ -46,7 +46,7 @@ public class PSOAgent implements Configurations {
             p.setpBest(getPBest(p));
             fitnessValueList[Id] = swarm.get(Id).getFitnessValue();
 
-            // step 2 - update gBest
+            // step 2 - update population gBest
             updateFitnessList();
             int bestParticleIndex = SwarmFunctions.getMaxPos(fitnessValueList);//to find a maximum position
             if (t == 0 || fitnessValueList[bestParticleIndex] > gBest) {
@@ -59,7 +59,7 @@ public class PSOAgent implements Configurations {
             double r1 = generator.nextDouble();
             double r2 = generator.nextDouble();
 
-            // step 3 - update velocity
+            // step 3 - update population velocity
             double[] newVel = new double[PROBLEM_DIMENSION];
             newVel[0] = (w * p.getVelocity().getPos()[0])
                     + (r1 * C1) * (getPBest(swarm.get(Id)).getLocation().getLoc()[0] - p.getLocation().getLoc()[0])
@@ -70,7 +70,7 @@ public class PSOAgent implements Configurations {
             Velocity vel = new Velocity(newVel);
             p.setVelocity(vel);
 
-            // step 4 - update location
+            // step 4 - update  poulation location
             double[] newLoc = new double[PROBLEM_DIMENSION];
             newLoc[0] = p.getLocation().getLoc()[0] + newVel[0];
             newLoc[1] = p.getLocation().getLoc()[1] + newVel[1];

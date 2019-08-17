@@ -4,17 +4,18 @@
  * and open the template in the editor.
  */
 package org.neu.pso.swarmfunctions.timertasks;
+
 import java.util.TimerTask;
 
 /**
  *
  * @author shashanksaurav
  */
-public class EvalTimeTask extends TimerTask{
+public class EvalTimeTask extends TimerTask {
 
     @Override
     public void run() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
