@@ -42,27 +42,27 @@ public class SwarmFunctions {
     public static final double Y_NEIGHBOURHOOD_B = 0;
     public static final long POPULATION_B = 300;
     public static final long POPULATION_C = 100;
-    public static final double DIATANCE_B = Math.sqrt((Math.pow((X_NEIGHBOURHOOD_B - X_NEIGHBOURHOOD_C), 2) + Math.pow((Y_NEIGHBOURHOOD_B - X_NEIGHBOURHOOD_C), 2))); //set some attributes for the basic point B, can be modified
+    public static final double DIATANCE_B = Math.sqrt((Math.pow((X_NEIGHBOURHOOD_B - X_NEIGHBOURHOOD_C), 2) + Math.pow((Y_NEIGHBOURHOOD_B - Y_NEIGHBOURHOOD_C), 2))); //set some attributes for the basic point B, can be modified
 
-    public static double calculateFitnessValue(Location location, double population) { // Reilly's law of retail gravitation
-
+    // Reilly's law of retail gravitation
+    public static double calculateFitnessValue(Location location, double population) { 
         double x = location.getLoc()[0];
         double y = location.getLoc()[1];
-        double distance1 = Math.sqrt((Math.pow((x - X_NEIGHBOURHOOD_C), 2) + Math.pow((y - Y_NEIGHBOURHOOD_C), 2))); // calculate the distance from point C
-        double result = 3000 - Math.pow((distance1 - 30), 2);
+        double distance = Math.sqrt((Math.pow((x - X_NEIGHBOURHOOD_C), 2) + Math.pow((y - Y_NEIGHBOURHOOD_C), 2))); // calculate the distance from point C
+        double result = 3000 - Math.pow((distance - 30), 2);
         return result;
     }
     
-    public static int getMaxPos(double[] list) {
-        int popResult = 0;
-        double maxPopValue = list[0];
-        for (int i = 1; i < list.length; i++) {
-            if (list[i] > maxPopValue) {
-                maxPopValue = list[i];
-                popResult = i;
+    public static int getMaxPos(double[] listOfPos) {
+        int positionResult = 0;
+        double maxPosValue = listOfPos[0];
+        for (int i = 1; i < listOfPos.length; i++) {
+            if (listOfPos[i] > maxPosValue) {
+                maxPosValue = listOfPos[i];
+                positionResult = i;
             }
         }
-        return popResult;
+        return positionResult;
     }
 
     public static double calculatePopulation(Location location) {
@@ -85,50 +85,40 @@ public class SwarmFunctions {
         return distance;
     }
     
-    
-    public void calculateParticleMovement(Random generator){
-        
-            for (int i = 0; i < SWARM_SIZE; i++) {
-            Particle pf = new Particle();
-           // randomize location inside a the given space defined in our population problem Set
-            double[] loc = new double[PROBLEM_DIMENSION];
-            loc[0] = SwarmFunctions.S_X_LOW_LOC + generator.nextDouble() * (SwarmFunctions.S_X_HIGH_LOC - SwarmFunctions.S_X_LOW_LOC);
-            loc[1] = SwarmFunctions.S_Y_LOW_LOC + generator.nextDouble() * (SwarmFunctions.S_Y_HIGH_LOC - SwarmFunctions.S_Y_LOW_LOC);
-            Location location = new Location(loc);
-
-            // randomize velocity in the range defined in n our population problem Set
-            double[] vel = new double[PROBLEM_DIMENSION];
-            vel[0] = SwarmFunctions.PAR_LOW_VEL + generator.nextDouble() * (SwarmFunctions.PAR_HIGH_VEL - SwarmFunctions.PAR_LOW_VEL);
-            vel[1] = SwarmFunctions.PAR_LOW_VEL + generator.nextDouble() * (SwarmFunctions.PAR_HIGH_VEL - SwarmFunctions.PAR_LOW_VEL);
-            Velocity velocity = new Velocity(vel);
-
-            //at the very beginning, the pBest is current particle itself which is calculated
-            PBest pBest = new PBest();
-            pBest.setId(i);
-            pBest.setLocation(location);
-            pBest.setFitnessValue(calculateFitnessValue(location, calculatePopulation(location)));
-
-            pf.setLocation(location);
-            pf.setVelocity(velocity);
-            pf.setId(i);
-            pf.setPopulation(calculatePopulation(location));
-            pf.setDistance(calculateDistance(location));
-            pf.setpBest(pBest);
-
-            swarm.add(pf);
-
-        }
-    
-    
-    }
-    
-    
     public Vector<Particle> initializeSwarm() {
-        
-        
         Random generator = new Random();
         calculateParticleMovement(generator);
-
         return swarm;
     }
+    
+    
+    public void calculateParticleMovement(Random generator){
+            for (int i = 0; i < SWARM_SIZE; i++) {
+                Particle particle = new Particle();
+               // randomize location
+                double[] loc = new double[PROBLEM_DIMENSION];
+                loc[0] = SwarmFunctions.S_X_LOW_LOC + generator.nextDouble() * (SwarmFunctions.S_X_HIGH_LOC - SwarmFunctions.S_X_LOW_LOC);
+                loc[1] = SwarmFunctions.S_Y_LOW_LOC + generator.nextDouble() * (SwarmFunctions.S_Y_HIGH_LOC - SwarmFunctions.S_Y_LOW_LOC);
+                Location location = new Location(loc);
+
+                // randomize velocity
+                double[] vel = new double[PROBLEM_DIMENSION];
+                vel[0] = SwarmFunctions.PAR_LOW_VEL + generator.nextDouble() * (SwarmFunctions.PAR_HIGH_VEL - SwarmFunctions.PAR_LOW_VEL);
+                vel[1] = SwarmFunctions.PAR_LOW_VEL + generator.nextDouble() * (SwarmFunctions.PAR_HIGH_VEL - SwarmFunctions.PAR_LOW_VEL);
+                Velocity velocity = new Velocity(vel);
+
+                // pBest is calculated initially with current particle itself
+                PBest pBest = new PBest();
+                pBest.setId(i);
+                pBest.setLocation(location);
+                pBest.setFitnessValue(calculateFitnessValue(location, calculatePopulation(location)));
+                particle.setLocation(location);
+                particle.setVelocity(velocity);
+                particle.setId(i);
+                particle.setPopulation(calculatePopulation(location));
+                particle.setDistance(calculateDistance(location));
+                particle.setpBest(pBest);
+                swarm.add(particle);
+            } // end for
+    } // end calculateParticleMovement function
 }

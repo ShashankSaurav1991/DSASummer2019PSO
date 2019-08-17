@@ -22,7 +22,7 @@ public class PSOAgent implements Configurations {
 
     private double gBest;
     private Location gBestLocation;
-    private final double[] fitnessValueList = new double[SWARM_SIZE];
+    private final double[] fitnessValues = new double[SWARM_SIZE];
 
     Random generator = new Random();
 
@@ -34,7 +34,7 @@ public class PSOAgent implements Configurations {
         double w;
         double err = 9999;
         while (t < MAX_ITERATION && err > SwarmFunctions.PAR_ERR_TOLERANCE) {
-            //      step 1 - update pBest, based on each particular particle
+            // step 1 - update pBest, based on each particle
             for (int i = 0; i < SWARM_SIZE; i++) {
                 double oldFitnessValue = swarm.get(i).getFitnessValue();
                 PBest newPBest = getPBest(swarm.get(i));
@@ -44,13 +44,13 @@ public class PSOAgent implements Configurations {
                 }
             }
             p.setpBest(getPBest(p));
-            fitnessValueList[Id] = swarm.get(Id).getFitnessValue();
+            fitnessValues[Id] = swarm.get(Id).getFitnessValue();
 
             // step 2 - update population gBest
             updateFitnessList();
-            int bestParticleIndex = SwarmFunctions.getMaxPos(fitnessValueList);//to find a maximum position
-            if (t == 0 || fitnessValueList[bestParticleIndex] > gBest) {
-                gBest = fitnessValueList[bestParticleIndex];
+            int bestParticleIndex = SwarmFunctions.getMaxPos(fitnessValues);//to find a maximum position
+            if (t == 0 || fitnessValues[bestParticleIndex] > gBest) {
+                gBest = fitnessValues[bestParticleIndex];
                 gBestLocation = swarm.get(bestParticleIndex).getLocation();
             }
 
@@ -85,7 +85,7 @@ public class PSOAgent implements Configurations {
                     + "Value:" + SwarmFunctions.calculateFitnessValue(gBestLocation, calculatePopulation(gBestLocation)));
             t++;
             updateFitnessList();
-        }
+        } // end while loop
 
         System.out.println("----------------------------------------------------------------------------");
         System.out.println("\nSolution found at iteration " + (t - 1) + ", the solutions is:");
@@ -93,28 +93,27 @@ public class PSOAgent implements Configurations {
         System.out.println("     Best Y: " + gBestLocation.getLoc()[1]);
         System.out.println("----------------------------------------------------------------------------");
         return gBestLocation;
-    }
+    } // end function execute
 
     public void updateFitnessList() {
         for (int i = 0; i < SWARM_SIZE; i++) {
-            fitnessValueList[i] = swarm.get(i).getFitnessValue();
+            fitnessValues[i] = swarm.get(i).getFitnessValue();
         }
     }
-
-    public PBest getPBest(Particle particle) {//based on the view of this specific particle, store the PBest in a range
+    
+    //based on the view of this specific particle, store the PBest in a range
+    public PBest getPBest(Particle particle) {
         PBest p = new PBest();
         p.setId(particle.getId());
         p.setLocation(particle.getLocation());
-        p.setFitnessValue(particle.getFitnessValue());//initializa to avoid null exception
+        p.setFitnessValue(particle.getFitnessValue());
 
         double max = 0;
-        //some info of the current particle
         double x0 = particle.getLocation().getLoc()[0];
         double y0 = particle.getLocation().getLoc()[1];
-//          double fitnessValue0 = calculateFitnessValue(location, calculatePopulation(location));
 
+        //get some information of other particles
         for (int i = 0; i < SWARM_SIZE; i++) {
-            //get some info of other particles
             double x1 = swarm.get(i).getLocation().getLoc()[0];
             double y1 = swarm.get(i).getLocation().getLoc()[1];
             double range = Math.sqrt((Math.pow((x0 - x1), 2) + Math.pow((y0 - y1), 2))); // calculate the distance between current particle and other particle

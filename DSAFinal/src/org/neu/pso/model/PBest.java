@@ -10,6 +10,7 @@ package org.neu.pso.model;
  * @author anshit
  */
 public class PBest {
+
     private int Id;
     private double fitnessValue;
     private Location location;
